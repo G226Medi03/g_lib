@@ -9,26 +9,6 @@
     reqwest = { version = "0.11", features = ["blocking", "json"] }
 */
 
-///How to use Spawn_AsyncFunc
-/// let a = match g_lib::Spawn_AsyncFunc(|| Box::pin(async_function(10))) {
-///     Ok(result) => {
-///         println!("Result: {}", result);
-///         result
-///     }
-///     Err(e) => {
-///         eprintln!("Error: {}", e);
-///         0
-///     }
-/// };
-pub fn Spawn_AsyncFunc<F, T>(func: F) -> Result<T, Box<dyn std::error::Error>>
-where
-    F: FnOnce() -> std::pin::Pin<Box<dyn std::future::Future<Output = T> + Send>> + Send + 'static,
-    T: Send + 'static,
-{
-    let rt = tokio::runtime::Runtime::new()?;
-    let result = rt.block_on(func());
-    Ok(result)
-}
 
 pub fn Get_uCountValueInVector<T>(Value: T, Vector: &Vec<T>) -> usize
 where
