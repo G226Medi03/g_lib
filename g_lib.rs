@@ -767,10 +767,6 @@ pub fn Get_sIpNiPort() -> (String, u16) {
     return (local_addr.ip().to_string(), local_addr.port());
 }
 
-#[inline]
-pub async fn aync_sleep(fSeconds: f32) {
-    tokio::time::sleep(std::time::Duration::from_secs_f32(fSeconds)).await;
-}
 
 #[inline]
 pub fn sleep(fSeconds: f32) {
