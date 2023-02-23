@@ -783,8 +783,11 @@ pub fn Get_iRandomNum(iMin: i32, iMax: i32) -> i32 {
 
 #[inline]
 pub fn Get_sInput(sInputText: &str) -> String {
-    print!("{}", sInputText);
-
+    if sInputText != "" {
+        print!("{}", sInputText);
+        std_flush();
+    }
+    
     let mut sInput = String::new();
     std::io::stdin().read_line(&mut sInput).unwrap();
     sInput = sInput[..sInput.len() - 2].to_owned();
@@ -814,7 +817,7 @@ where
 }
 
 #[inline]
-pub fn RemoveValueFromVec<T>(value: T, vec: &mut Vec<T>)
+pub fn RemoveValueFromVec<T>(vec: &mut Vec<T>, value: T)
 where
     T: std::cmp::PartialEq,
 {
