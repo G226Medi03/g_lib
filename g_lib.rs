@@ -80,19 +80,19 @@ pub struct RiotDevelop {
 }
 
 impl RiotDevelop {
-    pub fn new(sRiotDeveloperApiKey: &str) -> Option<RiotDevelop> {
+    pub fn new(sRiotDeveloperApiKey: &str) -> Result<RiotDevelop, String> {
         let sUrl = "https://kr.api.riotgames.com/lol/platform/v3/champion-rotations/".to_owned()
             + "?api_key="
             + sRiotDeveloperApiKey;
         let jRiotUserInfo = Get_jWebApiResponse(sUrl);
         match (&jRiotUserInfo)["maxNewPlayerLevel"] {
             serde_json::Value::Null => {
-                println!("Err Invalid Riot Api Key : Get a new one.");
-                return None;
+                //println!("Err Invalid Riot Api Key : Get a new one.");
+                return Err("Invalid Riot Api Key. Get a new one.".to_owned());
             }
 
             _ => {
-                return Some(RiotDevelop {
+                return Ok(RiotDevelop {
                     sRiotDeveloperApiKey: sRiotDeveloperApiKey.to_owned(),
                     sUserName: String::new(),
                 })
