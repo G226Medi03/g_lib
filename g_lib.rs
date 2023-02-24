@@ -10,7 +10,7 @@
 */
 
 
-pub fn Get_uCountValueInVector<T>(Value: T, Vector: &Vec<T>) -> usize
+pub fn Get_uCountOfValueInVector<T>(Value: T, Vector: &Vec<T>) -> usize
 where
     T: std::cmp::PartialEq,
 {
