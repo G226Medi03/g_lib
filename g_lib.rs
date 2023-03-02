@@ -524,8 +524,10 @@ pub fn Get_sCurDir() -> String {
         .unwrap();
 }
 
-pub fn Set_CurDir(sDir:&str) {
-    std::env::set_current_dir(sDir).unwrap();
+pub fn Set_CurDir(sDir:&str) -> Result<(),std::io::Error> {
+    std::env::set_current_dir(sDir)?;
+
+    Ok(())
 }
 
 #[inline]
