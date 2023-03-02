@@ -524,6 +524,10 @@ pub fn Get_sCurrentDirectory() -> String {
         .unwrap();
 }
 
+pub fn Set_CurDir(sDir:&str) {
+    std::env::set_current_dir(sDir).unwrap();
+}
+
 #[inline]
 pub fn Get_Db(s_FilePartName: &str) -> Db {
     return Db {
