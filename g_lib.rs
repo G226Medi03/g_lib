@@ -516,7 +516,7 @@ pub fn WaitUntilEnter() {
 }
 
 #[inline]
-pub fn Get_sCurrentDirectory() -> String {
+pub fn Get_sCurDir() -> String {
     return std::env::current_dir()
         .unwrap()
         .into_os_string()
