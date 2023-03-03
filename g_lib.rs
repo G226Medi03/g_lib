@@ -686,7 +686,7 @@ impl TcpServer {
                     );
                     std::thread::spawn(move || {
                         // connection succeeded
-                        Self::handle_client(stream, func)
+                        Self::handle_client_s2s(stream, func)
                     });
                 }
 
@@ -698,7 +698,7 @@ impl TcpServer {
         }
     }
 
-    fn handle_client(mut stream: std::net::TcpStream, func: fn(String) -> String) {
+    fn handle_client_s2s(mut stream: std::net::TcpStream, func: fn(String) -> String) {
         const iByteSize: usize = 4096;
 
         let mut byteFromClient: &[u8];
