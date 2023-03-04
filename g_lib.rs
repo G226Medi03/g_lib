@@ -575,7 +575,7 @@ impl Db {
         &'a self,
         sTable: &str,
         sCondition: &str,
-    ) -> impl Iterator<Item = sqlite::Row> + 'a {
+    ) -> Vec<sqlite::Row> {
         // sCondition1 = r#"s_en_name LIKE '%Cholera%'"#;
         // sCondition2 = r#"s_en_name = "Cholera due to Vibrio cholerae 01, biovar cholerae""#;
 
@@ -583,12 +583,12 @@ impl Db {
 
         let sQuery: String =
             "SELECT * FROM ".to_string() + &sTable + " WHERE " + &sCondition.replace("==", "=");
-        let g_rows = (&self)
+        let g_rows: Vec<sqlite::Row> = (&self)
             .ConnToDb
             .prepare(sQuery)
             .unwrap()
             .into_iter()
-            .map(|row| row.unwrap());
+            .map(|row| row.unwrap()).collect();
 
         //let b = &a.cloned();
         return g_rows;
